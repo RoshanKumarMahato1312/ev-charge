@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,  // ← Changed from ObjectId to String
     required: true
   },
   stationId: {
@@ -17,17 +16,17 @@ const bookingSchema = new mongoose.Schema({
     required: true
   },
   duration: {
-    type: Number, // in minutes
+    type: Number,  // Duration in minutes
+    required: true
+  },
+  totalAmount: {
+    type: Number,
     required: true
   },
   status: {
     type: String,
     enum: ['pending', 'confirmed', 'completed', 'cancelled'],
     default: 'pending'
-  },
-  totalAmount: {
-    type: Number,
-    required: true
   },
   createdAt: {
     type: Date,
@@ -36,3 +35,4 @@ const bookingSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Booking', bookingSchema);
+
